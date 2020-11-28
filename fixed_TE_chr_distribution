@@ -37,15 +37,15 @@ with open('/Users/yinjieqiu/Desktop/TE_chromsome_distribution/B73_LTR_gff_conver
 
 # intersect LTRs that are in the centromere regions: 
 
-intersectBed -a nature_B73_cent_v4.txt -b B73_LTR_gff_convert.txt -wa -wb > intersect_LTR_gff_bed.txt
-
-# there is a total of 644 of the gff that are intersect with the bed file 
+#intersectBed -a nature_B73_cent_v4.txt -b B73_LTR_gff_convert.txt -wa -wb > intersect_LTR_gff_bed.txt
+intersectBed -a peri_centromere_v2_v4.bed -b B73_LTR_gff_convert.txt -wa -wb > intersect_LTR_gff_bed.txt
+# there is a total of 45617 of the gff that are intersect with the bed file 
 
 # getting the name of the elements that are in the centromere, this will be used for left join to the final matrix 
 cut -f 12 intersect_LTR_gff_bed.txt > pericentromeric_TE_id.txt
 cut -f 12 intersect_LTR_gff_bed.txt | sed 's/$/,pericentromeric/'  > TE_elements_in_centromere.txt
 
-# the rest TEs that are on chr arm is labeled as arm (149264)
+# the rest TEs that are on chr arm is labeled as arm (48837)
 grep -Fvxf pericentromeric_TE_id.txt B73_LTR_TE_id.txt | sed 's/$/,arm/'  > TE_elements_in_arm.txt
 
 # joining to dataset together 

@@ -1,0 +1,19 @@
+module load samtools
+
+samtools depth B73_B73v4_map.q20.bam |  awk '{sum+=$3} END { print "Average = ",sum/NR}'
+15.3769
+# CO B73	B73v4	 13.9774
+
+
+samtools depth W22_W22v12_map.q20.bam |  awk '{sum+=$3} END { print "Average = ",sum/NR}'
+
+samtools depth PH207_PH207_map.q20.bam |  awk '{sum+=$3} END { print "Average = ",sum/NR}'
+
+samtools depth Mo17_Mo17_map.q20.bam |  awk '{sum+=$3} END { print "Average = ",sum/NR}'
+
+
+# subsampling to 5x, 10x, 15x, 20x 
+
+
+
+/panfs/roc/msisoft/bwa/0.7.17.CentOS7/

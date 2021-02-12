@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=10gb
+#SBATCH -t 4:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=qiuxx221@umn.edu
+#SBATCH -o bam_subsample.out
+#SBATCH -e bam_subsample.err
+
+cd /scratch.global/qiuxx221/widi_bam_self
+
+export PATH="/home/hirschc1/qiuxx221/anaconda2/bin/:$PATH"
+
+source ~/anaconda2/etc/profile.d/conda.sh
+conda activate Widiv_SV_py3
+
+sambamba view -h -t 4 -s 0.3927585792 -f bam --subsampling-seed=21 Mo17_Mo17_map.q20.bam -o subsampledMo17_15x.bam
+
+sambamba view -h -t 4 -s 0.3482993703 -f bam --subsampling-seed=21 PH207_PH207_map.q20.bam -o subsampledPH207_15x.bam
+
+sambamba view -h -t 4 -s 0.8283219853 -f bam --subsampling-seed=21 W22_W22v12_map.q20.bam -o subsampledMo17_15x.bam

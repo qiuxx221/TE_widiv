@@ -1,1 +1,0 @@
-bedtools multicov -bams /scratch.global/qiuxx221/widi_bam_self/subsampledMo17_15x.bam -bed /home/hirschc1/oconnorc/sarah_te_files/Mo17.structuralTEv2.2018.12.28.filteredTE_start.in_10bp.gff3 > ~/TE_variation/Mo17_Mo17_subsample_15x_start.in.multicov_10bp.txt

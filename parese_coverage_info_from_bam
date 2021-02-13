@@ -17,6 +17,10 @@ module load samtools
 
 cd /scratch.global/qiuxx221/widi_bam_self/B73
 
+for i in *ori.bam; do
+	samtools index $i 
+done 
+
 for i in *.bam; do
   bedtools multicov -bams $i -bed /home/hirschc1/oconnorc/sarah_te_files/B73.structuralTEv2.2018.12.20.filteredTE_start.in_10bp.gff3  | cut -f 9,10 | sed 's|=|\t|g;s|;|\t|g' | cut -f 2,5 | sed 's|$|\tstart|'>  $(basename "$i")_start_10bp.txt
   bedtools multicov -bams $i -bed /home/hirschc1/oconnorc/sarah_te_files/B73.structuralTEv2.2018.12.20.filteredTE_end.in_10bp.gff3  | cut -f 9,10 | sed 's|=|\t|g;s|;|\t|g' | cut -f 2,5 | sed 's|$|\tend|'>  $(basename "$i")_end_10bp.txt

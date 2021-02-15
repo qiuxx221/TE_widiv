@@ -18,19 +18,19 @@ conda activate Widiv_SV_py3
 
 ############# Four ref self mapping 
 ## 15x 
-sambamba view -h -t 4 -s 0.3927585792 -f bam --subsampling-seed=21 Mo17_Mo17_map.q20.bam -o subsampledMo17_15x.bam
-sambamba view -h -t 4 -s 0.3482993703 -f bam --subsampling-seed=21 PH207_PH207_map.q20.bam -o subsampledPH207_15x.bam
-sambamba view -h -t 4 -s 0.8283219853 -f bam --subsampling-seed=21 W22_W22v12_map.q20.bam -o subsampledW22_15x.bam
+sambamba view -h -t 4 -s 0.3927585792 -f bam --subsampling-seed=21 Mo17_Mo17_map.q20.bam -o subsampled_Mo17_Mo17_15x.bam
+sambamba view -h -t 4 -s 0.3482993703 -f bam --subsampling-seed=21 PH207_PH207_map.q20.bam -o subsampled_PH207_PH207_15x.bam
+sambamba view -h -t 4 -s 0.8283219853 -f bam --subsampling-seed=21 W22_W22v12_map.q20.bam -o subsampled_W22_W22_15x.bam
 
 ## 30x 
-sambamba view -h -t 4 -s 0.7855171583 -f bam --subsampling-seed=21 Mo17_Mo17_map.q20.bam -o subsampledMo17_30x.bam
-sambamba view -h -t 4 -s 0.6965987405 -f bam --subsampling-seed=21 PH207_PH207_map.q20.bam -o subsampledPH207_30x.bam
+sambamba view -h -t 4 -s 0.7855171583 -f bam --subsampling-seed=21 Mo17_Mo17_map.q20.bam -o subsampled_Mo17_Mo17_30x.bam
+sambamba view -h -t 4 -s 0.6965987405 -f bam --subsampling-seed=21 PH207_PH207_map.q20.bam -o subsampled_PH207_PH207_30x.bam
 
 ## 10x 
-sambamba view -h -t 4 -s 0.7154406399 -f bam --subsampling-seed=21 B73_B73v4_map.q20.bam -o subsampledB73_10x.bam
-sambamba view -h -t 4 -s 0.2321995802 -f bam --subsampling-seed=21 PH207_PH207_map.q20.bam -o subsampledPH207_10x.bam
-sambamba view -h -t 4 -s 0.2618390528 -f bam --subsampling-seed=21 Mo17_Mo17_map.q20.bam -o subsampledMo17_10x.bam
-sambamba view -h -t 4 -s 0.5522146569 -f bam --subsampling-seed=21 W22_W22v12_map.q20.bam -o subsampledMo17_10x.bam
+sambamba view -h -t 4 -s 0.7154406399 -f bam --subsampling-seed=21 B73_B73v4_map.q20.bam -o subsampled_B73_B73_10x.bam
+sambamba view -h -t 4 -s 0.2321995802 -f bam --subsampling-seed=21 PH207_PH207_map.q20.bam -o subsampled_PH207_PH207_10x.bam
+sambamba view -h -t 4 -s 0.2618390528 -f bam --subsampling-seed=21 Mo17_Mo17_map.q20.bam -o subsampled_Mo17_Mo17_10x.bam
+sambamba view -h -t 4 -s 0.5522146569 -f bam --subsampling-seed=21 W22_W22v12_map.q20.bam -o subsampled_W22_W22_10x.bam
 
 
 

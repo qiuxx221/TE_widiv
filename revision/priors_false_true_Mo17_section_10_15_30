@@ -35,7 +35,7 @@ grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/B73_present_Mo17_ref.t
 
 
 # PH207 
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_present_Mo17_ref.txt subsampled_PH207_Mo17_10x.bam_fmt_10_bp.txt > cov_PH207_present_Mo17_15x.txt
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_present_Mo17_ref.txt subsampled_PH207_Mo17_10x.bam_fmt_10_bp.txt > cov_PH207_present_Mo17_10x.txt
 ### total TE 
 
 
@@ -52,7 +52,7 @@ grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/B73_absent_Mo17_ref.tx
 
 
 # PH207 
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_absent_Mo17_ref.txt subsampled_PH207_Mo17_10x.bam_fmt_10_bp.txt > cov_PH207_absent_Mo17_15x.txt
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_absent_Mo17_ref.txt subsampled_PH207_Mo17_10x.bam_fmt_10_bp.txt > cov_PH207_absent_Mo17_10x.txt
 ### total TE 
 
 ############################################################ 15x ############################################################

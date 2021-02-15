@@ -21,7 +21,7 @@ cut -f 4 B73_allContrasts_filteredTE_13Jan19.bed | cut -d ";" -f 1,4 | grep Abse
 ############################################################ 10x ############################################################
 ############################## Present 
 # B73 
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/W22_present_B73_ref.txt subsampled_B73_B73_10x.bam_fmt_10_bp.txt > cov_B73_present_B73_10x.txt
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/B73_present_B73_ref.txt subsampled_B73_B73_10x.bam_fmt_10_bp.txt > cov_B73_present_B73_10x.txt
 ### total TE 333510
 
 # W22 TE: 

@@ -1,0 +1,141 @@
+library("caret")
+library("randomForest")
+library("kernlab")
+library("tidyverse")
+library("caTools")
+library("tidyr")
+library("tidyverse")
+
+# reading coverage file 
+Prior_15x_present_full <- read.csv("present_downsampling_cov_15x_matrix.txt", sep="\t",header = FALSE)
+Prior_15x_absent_full <- read.csv("absent_downsampling_cov_15x_matrix.txt", sep="\t",header = FALSE)
+working_set_15x_full = rbind(Prior_15x_present_full,Prior_15x_absent_full)
+
+
+colnames(working_set_15x_full) <- c("TE_ID","10bp_Coverage","Position","Mean_genomewide_coverage","Sequenced_genome","Ref_genome","TE_PAV")
+
+reshape_df = working_set_15x_full  %>% 
+  pivot_wider(names_from = "Position", values_from = "10bp_Coverage") 
+
+
+# convert the present/absent into 1, and 0 
+reshape_df$TE_PAV <- ifelse(reshape_df$TE_PAV == "present",1,0)
+
+
+# A tibble: 15 x 4
+# Groups:   Sequenced_genome, Ref_genome [9]
+   Sequenced_genome Ref_genome TE_PAV   Freq
+   <fct>            <fct>       <dbl>  <int>
+ 1 Mo17             B73v4           0 134040
+ 2 Mo17             B73v4           1 186721
+ 3 Mo17             Mo17            1 292789
+ 4 Mo17             PH207           0  52910
+ 5 Mo17             PH207           1 130383
+ 6 Mo17             W22v12          0 126181
+ 7 Mo17             W22v12          1 174375
+ 8 PH207            B73v4           0 136407
+ 9 PH207            B73v4           1 175293
+10 PH207            Mo17            0 123251
+11 PH207            Mo17            1 149178
+12 PH207            PH207           1 231841
+13 PH207            W22v12          0 135296
+14 PH207            W22v12          1 156658
+15 W22              W22v12          1 314403
+
+# take Mo17 ref out to make training set, PH207 seq genome out and keep it as indenpendent evaluation set 
+
+training_no_Mo17_ref_PH207 = reshape_df %>% filter(Ref_genome != "Mo17" & Sequenced_genome != "PH207" )
+
+# training set includes 
+# 1 Mo17             B73v4           0 134040
+# 2 Mo17             B73v4           1 186721
+# 4 Mo17             PH207           0  52910
+# 5 Mo17             PH207           1 130383
+# 15 W22             W22v12          1 314403
+
+# test set would be 
+# 8 PH207            B73v4           0 136407
+# 9 PH207            B73v4           1 175293
+# 10 PH207            Mo17            0 123251
+# 11 PH207            Mo17            1 149178
+# 13 PH207            W22v12          0 135296
+# 14 PH207            W22v12          1 156658
+
+table(training_no_Mo17_ref_PH207$TE_PAV) %>% prop.table()
+# probablity in the training set 
+#         0         1 
+# 0.2798278 0.7201722 
+
+downsamping_df_base = training_no_Mo17_ref_PH207 %>% select("TE_ID","start","end","TE_PAV")
+balanced_df = downSample(downsamping_df_base[,2:3], as.factor(downsamping_df_base$TE_PAV), list = FALSE, yname = "TE_PAV")
+
+# after the downsample, it is a even distribution
+#     0      1 
+# 313131 313131 
+
+# take 0.8 of the dataset as the training dataset 
+set.seed(123)
+split = sample.split(balanced_df$TE_PAV, SplitRatio = 0.8)
+training_set = subset(balanced_df, split == TRUE)
+test_set_within = subset(balanced_df, split == FALSE)
+
+# building random forest model 
+rf <- randomForest(
+  TE_PAV ~ .,
+  data=training_set
+)
+
+# rf 
+# Call:
+# randomForest(formula = TE_PAV ~ ., data = training_set) 
+#               Type of random forest: classification
+#                     Number of trees: 500
+# No. of variables tried at each split: 1
+
+#         OOB estimate of  error rate: 11.79%
+# Confusion matrix:
+#        0      1 class.error
+# 0 220900  29605   0.1181813
+# 1  29478 221027   0.1176743
+
+### test combination 
+# 8 PH207            B73v4           0 136407
+# 9 PH207            B73v4           1 175293
+# 10 PH207            Mo17            0 123251
+# 11 PH207            Mo17            1 149178
+# 13 PH207            W22v12          0 135296
+# 14 PH207            W22v12          1 156658
+
+# tesing PH207 mapping to B73v4
+
+test_PH207_B73 = reshape_df %>% filter(Ref_genome == "B73v4" & Sequenced_genome == "PH207") %>% select("TE_ID","start","end","TE_PAV")
+
+pred = predict(rf, newdata=test_PH207_B73)
+joint_PH207_B73v4_ref <- cbind(test_PH207_B73,as.data.frame(pred))
+
+# summary stats 
+summary_PH207_B73v4_ref <- joint_PH207_B73v4_ref %>%  
+  group_by(TE_PAV,pred) %>% 
+  summarise(Freq = n()) 
+summary_PH207_B73v4_ref
+
+# A tibble: 4 x 3
+# Groups:   TE_PAV [2]
+  TE_PAV pred    Freq
+   <dbl> <fct>  <int>
+1      0 0     118259
+2      0 1      18148
+3      1 0      20812
+4      1 1     154481
+
+
+###########taking classifier approach: 
+
+
+classifier = randomForest(x = training_set[,1:2],
+                          y = training_set$TE_PAV,
+                          ntree = 500, random_state = 0)
+                          
+y_pred_PH207_B73_ref = predict(classifier, newdata = test_PH207_B73[,2:3])
+prob_PH207_B73_ref <- as.data.frame(y_pred_PH207_B73_ref)
+PH207_B73_ref_join <- cbind(test_PH207_B73,prob_PH207_B73_ref)

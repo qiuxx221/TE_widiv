@@ -1,0 +1,74 @@
+library("caret")
+library("randomForest")
+library("kernlab")
+library("tidyverse")
+library("caTools")
+library("tidyr")
+library("tidyverse")
+
+
+Prior_15x_present_full <- read.csv("present_downsampling_cov_15x_matrix.txt", sep="\t",header = FALSE)
+Prior_15x_absent_full <- read.csv("absent_downsampling_cov_15x_matrix.txt", sep="\t",header = FALSE)
+
+
+working_set_15x_full = rbind(Prior_15x_present_full,Prior_15x_absent_full)
+
+colnames(working_set_15x_full) <- c("TE_ID","10bp_Coverage","Position","Mean_genomewide_coverage","Sequenced_genome","Ref_genome","TE_PAV")
+
+reshape_df = working_set_15x_full  %>% 
+  pivot_wider(names_from = "Position", values_from = "10bp_Coverage") 
+
+
+reshape_df$TE_fam <- substr(reshape_df$TE_ID, 0, 3)
+table(reshape_df$Ref_genome)
+
+reshape_df$TE_order <-ifelse(reshape_df$TE_fam == "DHH",rr2 <-"Helitron",
+                                      ifelse(reshape_df$TE_fam == "DTA",rr2 <-"TIR",
+                                             ifelse(reshape_df$TE_fam == "DTC", rr2<-"TIR",
+                                                    ifelse(reshape_df$TE_fam == "DTH", rr2<-"TIR", 
+                                                           ifelse(reshape_df$TE_fam == "DTM", rr2<-"TIR", 
+                                                                  ifelse(reshape_df$TE_fam == "DTT", rr2<-"TIR",
+                                                                         ifelse(reshape_df$TE_fam == "DTX", rr2<-"TIR",
+                                                                                ifelse(reshape_df$TE_fam == "RIL", rr2<-"LINE",
+                                                                                       ifelse(reshape_df$TE_fam == "RIT", rr2<-"LINE",
+                                                                                              ifelse(reshape_df$TE_fam == "RLC", rr2<-"LTR",
+                                                                                                     ifelse(reshape_df$TE_fam == "RLG", rr2<-"LTR",
+                                                                                                            ifelse(reshape_df$TE_fam == "RLX", rr2<-"LTR",
+                                                                                                                   rr2<-"SINE"))))))))))))
+       
+       
+# 
+reshape_df <- na.omit(reshape_df)
+  
+training_no_Mo17_ref_PH207 = reshape_df %>% filter(Ref_genome != "Mo17" & Sequenced_genome != "PH207" )
+
+
+table(training_no_Mo17_ref_PH207$TE_PAV) %>% prop.table()
+
+
+# from now, only keep TE_id start, and stop, pav information
+downsamping_df_base = training_no_Mo17_ref_PH207 %>% select("TE_ID","start","end","TE_order","TE_PAV")
+
+# downsample training_no_Mo17_ref in order to create a balanced classifier 
+balanced_df = downSample(downsamping_df_base[,2:4], downsamping_df_base$TE_PAV, list = FALSE, yname = "TE_PAV")
+table(balanced_df$TE_PAV) 
+
+
+set.seed(123)
+split = sample.split(balanced_df$TE_PAV, SplitRatio = 0.8)
+training_set = subset(balanced_df, split == TRUE)
+test_set_within = subset(balanced_df, split == FALSE)
+
+table(balanced_df$TE_order)
+# random forest
+rf <- randomForest(
+  TE_PAV ~ .,
+  data=training_set
+)
+                                                                                                                          
+                                                                                                                          
+                                                                                                                      
+
+
+
+

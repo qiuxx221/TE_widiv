@@ -139,3 +139,15 @@ classifier = randomForest(x = training_set[,1:2],
 y_pred_PH207_B73_ref = predict(classifier, newdata = test_PH207_B73[,2:3])
 prob_PH207_B73_ref <- as.data.frame(y_pred_PH207_B73_ref)
 PH207_B73_ref_join <- cbind(test_PH207_B73,prob_PH207_B73_ref)
+
+
+predictions = classifier.predict_proba(test_PH207_B73[,2:3])
+
+y_pred = predict(classifier, newdata = test_PH207_B73[,2:3])
+
+
+
+prob=predict(rf,test_PH207_B73[,2:3],type="prob")
+PH207_B73_ref_join <- cbind(test_PH207_B73,as.data.frame(prob))
+
+

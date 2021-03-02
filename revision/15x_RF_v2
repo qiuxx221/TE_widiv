@@ -47,7 +47,7 @@ table(training_no_Mo17_ref_PH207$TE_PAV) %>% prop.table()
 
 
 # from now, only keep TE_id start, and stop, pav information
-downsamping_df_base = training_no_Mo17_ref_PH207 %>% select("TE_ID","start","end","TE_fam","TE_PAV")
+downsamping_df_base = training_no_Mo17_ref_PH207 %>% select("TE_ID","start","end","TE_order","TE_PAV")
 
 # downsample training_no_Mo17_ref in order to create a balanced classifier 
 balanced_df = downSample(downsamping_df_base[,2:4], downsamping_df_base$TE_PAV, list = FALSE, yname = "TE_PAV")
@@ -60,8 +60,6 @@ training_set = subset(balanced_df, split == TRUE)
 test_set_within = subset(balanced_df, split == FALSE)
 
 table(balanced_df$TE_order)
-
-balanced_df$TE_fam <- as.numeric(balanced_df$TE_fam)
 
 data_fac=balanced_df %>% mutate_if(is.character, as.factor)
 

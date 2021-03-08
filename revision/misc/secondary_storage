@@ -1,0 +1,16 @@
+
+
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=10gb
+#SBATCH -t 10:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=qiuxx221@umn.edu
+#SBATCH -o sec_tire.out
+#SBATCH -e sec_tire.error
+
+cd /scratch.global/qiuxx221/speed_seq_1_3_7/cmd0_done
+
+s3cmd put * s3://qiuxx221_widiv

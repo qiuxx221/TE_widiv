@@ -81,3 +81,11 @@ grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/Mo17_absent_PH207_ref.
 grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_present_PH207_ref.txt subsampled_PH207_PH207_30x.bam_fmt_10_bp.txt > cov_PH207_present_PH207_30x.txt
 ### total TE 175293
 
+
+# Mo17 
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/Mo17_present_PH207_ref.txt ori_Mo17_PH207_ori.bam_fmt_10_bp.txt > cov_Mo17_present_PH207_30x.txt
+
+# absent 
+# Mo17 
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/Mo17_absent_PH207_ref.txt ori_Mo17_PH207_ori.bam_fmt_10_bp.txt > cov_Mo17_absent_PH207_30x.txt
+

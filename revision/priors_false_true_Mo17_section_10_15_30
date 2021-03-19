@@ -41,7 +41,7 @@ grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/B73_absent_Mo17_ref.tx
 grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_absent_Mo17_ref.txt subsampled_PH207_Mo17_15x.bam_fmt_10_bp.txt > cov_PH207_absent_Mo17_15x.txt
 
 # W22
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/W22_present_Mo17_ref.txt ori_W22_Mo17_ori.bam_fmt_10_bp.txt > cov_W22_absent_Mo17_15x.txt
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/W22_absent_Mo17_ref.txt ori_W22_Mo17_ori.bam_fmt_10_bp.txt > cov_W22_absent_Mo17_15x.txt
 
 ############################################################ 30x ############################################################
 ### Present 

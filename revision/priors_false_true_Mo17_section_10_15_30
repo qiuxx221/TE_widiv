@@ -18,72 +18,39 @@ cut -f 4 Mo17_allContrasts_filteredTE_13Jan19.bed | cut -d ";" -f 1,3 | grep Abs
 cut -f 4 Mo17_allContrasts_filteredTE_13Jan19.bed | cut -d ";" -f 1,4 | grep Present | cut -d ';' -f 1 > PH207_present_Mo17_ref.txt
 cut -f 4 Mo17_allContrasts_filteredTE_13Jan19.bed | cut -d ";" -f 1,4 | grep Absent | cut -d ';' -f 1 > PH207_absent_Mo17_ref.txt
 
-############################################################ 10x ############################################################
-############################## Present 
-# Mo17  
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/Mo17_present_Mo17_ref.txt subsampled_Mo17_Mo17_10x.bam_fmt_10_bp.txt > cov_Mo17_present_Mo17_10x.txt
-### total TE 
-
-# W22 TE: 
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/W22_present_Mo17_ref.txt subsampled_W22_Mo17_10x.bam_fmt_10_bp.txt > cov_W22_present_Mo17_10x.txt
-### total TE 
-
-
-# B73 TE
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/B73_present_Mo17_ref.txt subsampled_B73_Mo17_10x.bam_fmt_10_bp.txt > cov_B73_present_Mo17_10x.txt
-### total TE 
-
-
-# PH207 
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_present_Mo17_ref.txt subsampled_PH207_Mo17_10x.bam_fmt_10_bp.txt > cov_PH207_present_Mo17_10x.txt
-### total TE 
-
-
-
-############################## Absent 
-# W22 TE: 
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/W22_absent_Mo17_ref.txt subsampled_W22_Mo17_10x.bam_fmt_10_bp.txt > cov_W22_absent_Mo17_10x.txt
-### total TE 
-
-
-# B73 TE
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/B73_absent_Mo17_ref.txt subsampled_B73_Mo17_10x.bam_fmt_10_bp.txt > cov_B73_absent_Mo17_10x.txt
-### total TE 
-
-
-# PH207 
-grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_absent_Mo17_ref.txt subsampled_PH207_Mo17_10x.bam_fmt_10_bp.txt > cov_PH207_absent_Mo17_10x.txt
-### total TE 
-
 ############################################################ 15x ############################################################
+### Present
+# B73 
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/B73_present_Mo17_ref.txt ori_B73_Mo17_ori.bam_fmt_10_bp.txt > cov_B73_present_Mo17_15x.txt
 
-# Present 
-# Mo17 TE
+# Mo17 
 grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/Mo17_present_Mo17_ref.txt subsampled_Mo17_Mo17_15x.bam_fmt_10_bp.txt > cov_Mo17_present_Mo17_15x.txt
-### total TE 
 
 # PH207 
 grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_present_Mo17_ref.txt subsampled_PH207_Mo17_15x.bam_fmt_10_bp.txt > cov_PH207_present_Mo17_15x.txt
-### total TE 
+
+# W22 
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/W22_present_Mo17_ref.txt ori_W22_Mo17_ori.bam_fmt_10_bp.txt > cov_W22_present_Mo17_15x.txt
 
 
-# absent 
+### absent
+# B73 
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/B73_absent_Mo17_ref.txt ori_B73_Mo17_ori.bam_fmt_10_bp.txt > cov_B73_absent_Mo17_15x.txt
+
 # PH207 
 grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_absent_Mo17_ref.txt subsampled_PH207_Mo17_15x.bam_fmt_10_bp.txt > cov_PH207_absent_Mo17_15x.txt
-### total TE 
+
+# W22
+grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/W22_present_Mo17_ref.txt ori_W22_Mo17_ori.bam_fmt_10_bp.txt > cov_W22_absent_Mo17_15x.txt
 
 ############################################################ 30x ############################################################
-
-# Present 
-# Mo17 TE
+### Present 
+# Mo17 
 grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/Mo17_present_Mo17_ref.txt subsampled_Mo17_Mo17_30x.bam_fmt_10_bp.txt > cov_Mo17_present_Mo17_30x.txt
-### total TE 
 
 # PH207 
 grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_present_Mo17_ref.txt subsampled_PH207_Mo17_30x.bam_fmt_10_bp.txt > cov_PH207_present_Mo17_30x.txt
-### total TE 
 
-
-# absent 
+### absent 
 # PH207 
 grep -Fwf ~/TE_variation/downsampling_priors/contrast_bed/PH207_absent_Mo17_ref.txt subsampled_PH207_Mo17_30x.bam_fmt_10_bp.txt > cov_PH207_absent_Mo17_30x.txt

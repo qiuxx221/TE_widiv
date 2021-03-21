@@ -1,3 +1,8 @@
+# split the 25x below into two files, with ~80,000,000 lines per file
+split -l 80000000 B73_ref_25_below_matrix_all.csv 
+
+
+
 
 # the input file will include three files: 30x, 15x-a, and 15x-b
 

@@ -29,12 +29,13 @@ cat ~/TE_variation/widiv_coverage/Mo17_TE_calls/joined_bedtool_files/below_25/rf
 mv ~/TE_variation/widiv_coverage/Mo17_TE_calls/joined_bedtool_files/below_25/rf_input_15x_model/Mo17_ref_25_below.txt ~/TE_variation/rf_prediction/widiv_set
 
 
-
-
-
+cd ~/TE_variation/rf_prediction/widiv_set
 module load R/3.6.3 
 Rscript format_refMo17.R
 
+
+################################################################################
+# format_refMo17.R
 # in R session, creating matrix 
 library("tidyverse")
 reshape_df <- read.csv( "Mo17_ref_25_and_above.txt", sep="\t",header = FALSE)

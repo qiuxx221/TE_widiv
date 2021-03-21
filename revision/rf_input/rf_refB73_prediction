@@ -1,0 +1,4 @@
+
+# the input file will include three files: 30x, 15x-a, and 15x-b
+
+cat refB73_* | grep -v TE_ID | cut -d ',' -f 3-10 > refB73v4_widiv_509.csv

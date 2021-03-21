@@ -31,6 +31,7 @@ mv ~/TE_variation/widiv_coverage/B73_TE_calls/joined_bedtool_files/below_25/rf_i
 
 
 
+cd ~/TE_variation/rf_prediction/widiv_set
 
 module load R/3.6.3 
 Rscript format_refB73.R

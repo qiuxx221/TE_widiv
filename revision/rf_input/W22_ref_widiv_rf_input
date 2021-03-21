@@ -28,12 +28,15 @@ cat ~/TE_variation/widiv_coverage/W22_TE_calls/joined_bedtool_files/below_25/rf_
 
 mv ~/TE_variation/widiv_coverage/W22_TE_calls/joined_bedtool_files/below_25/rf_input_15x_model/W22_ref_25_below.txt ~/TE_variation/rf_prediction/widiv_set
 
-
-
-
-
+cd ~/TE_variation/rf_prediction/widiv_set
 module load R/3.6.3 
 Rscript format_refW22.R
+
+
+
+
+
+
 
 # in R session, creating matrix 
 library("tidyverse")

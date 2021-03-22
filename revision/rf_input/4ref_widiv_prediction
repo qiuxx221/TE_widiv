@@ -121,4 +121,34 @@ write.csv(refW22_15x_pred_matrix_2,file="refW22_15x_pred_matrix_2.csv")
 
 # the input file will include three files: 30x, 15x-a, and 15x-b
 
-cat refB73_* | grep -v TE_ID | cut -d ',' -f 3-10 > refB73v4_widiv_509.csv
+cat refB73_* | grep -v TE_ID | cut -d ',' -f 3-10 > refB73v4_fam_widiv_509.csv
+cat refMo17_* | grep -v TE_ID | cut -d ',' -f 3-10 > refMo17_fam_widiv_509.csv
+cat refPH207_* | grep -v TE_ID | cut -d ',' -f 3-10 > refPH207_fam_widiv_509.csv
+cat refW22_* | grep -v TE_ID | cut -d ',' -f 3-10 > refW22_fam_widiv_509.csv
+
+
+
+cat refB73_* | grep -v TE_ID | cut -d ',' -f 3-10 > refB73v4_order_widiv_509.csv
+cat refMo17_* | grep -v TE_ID | cut -d ',' -f 3-10 > refMo17_order_widiv_509.csv
+cat refPH207_* | grep -v TE_ID | cut -d ',' -f 3-10 > refPH207_order_widiv_509.csv
+cat refW22_* | grep -v TE_ID | cut -d ',' -f 3-10 > refW22_order_widiv_509.csv
+
+
+
+# reshape all matrix to wide with present probably filled as value. 
+
+
+library(tidyverse)
+files <- list.files(path="/home/hirschc1/qiuxx221/TE_variation/rf_prediction/prediction/", pattern="*.csv", full.names=TRUE, recursive=FALSE)
+lapply(files, function(x) {
+  df <- fread(x, header = FALSE, data.table = FALSE)
+  colnames(df) <- c("TE_ID","start","end","Sequenced_genome","TE_fam","TE_order","absent","present")
+  df_select = df %>% select(TE_ID,Sequenced_genome,present) 
+  df_select %>% 
+    spread(Sequenced_genome, present) %>% write.csv(paste0(x, "_present_probability wide.csv"), row.names = FALSE)
+})
+
+
+
+
+

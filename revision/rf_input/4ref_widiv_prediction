@@ -137,7 +137,7 @@ cat refW22_* | grep -v TE_ID | cut -d ',' -f 3-10 > refW22_order_widiv_509.csv
 
 # reshape all matrix to wide with present probably filled as value. 
 
-
+library(data.table)
 library(tidyverse)
 files <- list.files(path="/home/hirschc1/qiuxx221/TE_variation/rf_prediction/prediction/", pattern="*.csv", full.names=TRUE, recursive=FALSE)
 lapply(files, function(x) {

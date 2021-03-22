@@ -145,7 +145,7 @@ lapply(files, function(x) {
   colnames(df) <- c("TE_ID","start","end","Sequenced_genome","TE_fam","TE_order","absent","present")
   df_select = df %>% select(TE_ID,Sequenced_genome,present) 
   df_select %>% 
-    spread(Sequenced_genome, present) %>% write.csv(paste0(x, "_present_probability wide.csv"), row.names = FALSE)
+    spread(Sequenced_genome, present) %>% write.csv(paste0(x, "_present_probability_wide.csv"), row.names = FALSE)
 })
 
 

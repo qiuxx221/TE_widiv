@@ -1,3 +1,5 @@
+# Only TEs that resequencing mapping to the ref itself can call out were kept for the analysis 
+
 library(tidyverse)
 # refB73 
 
